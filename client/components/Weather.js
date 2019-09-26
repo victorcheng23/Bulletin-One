@@ -1,5 +1,12 @@
 import React from "react";
-import { Image, Text, View } from "react-native";
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
 import { registerRootComponent } from "expo";
@@ -11,7 +18,8 @@ class Weather extends React.Component {
     this.state = {
       city: "New York",
       country: "US",
-      scale: "F"
+      scale: "F",
+      settings: false
     };
     this.changeScale = this.changeScale.bind(this);
   }
@@ -41,7 +49,7 @@ class Weather extends React.Component {
   render() {
     if (this.props.weather.main) {
       return (
-        <View>
+        <View style={styles.container}>
           <Image
             style={{ width: 50, height: 50 }}
             source={{
@@ -58,6 +66,9 @@ class Weather extends React.Component {
           <Text>
             High: {this.changeScale(this.props.weather.main.temp_max)}°
           </Text>
+          <TouchableOpacity>
+            <Text>Settings</Text>
+          </TouchableOpacity>
         </View>
       );
     } else {
@@ -78,3 +89,19 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Weather);
+
+//STYLING
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.2)",
+    width: "100%"
+  },
+  developmentModeText: {
+    marginBottom: 20,
+    color: "rgba(0,0,0,0.4)",
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: "center"
+  }
+});
