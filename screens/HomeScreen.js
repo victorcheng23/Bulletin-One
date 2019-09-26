@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-import Clock from "../components/Clock";
+import Clock from "../client/components/Clock";
 
-import { MonoText } from "../components/StyledText";
+import { MonoText } from "../client/components/StyledText";
 
 export default function HomeScreen() {
   return (

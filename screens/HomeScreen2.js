@@ -10,7 +10,7 @@ import {
   View
 } from "react-native";
 
-import { MonoText } from "../components/StyledText";
+import { MonoText } from "../client/components/StyledText";
 
 let time = new Date().toLocaleString();
 
