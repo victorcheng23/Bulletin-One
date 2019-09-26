@@ -10,6 +10,7 @@ import {
   View
 } from "react-native";
 import Clock from "../client/components/Clock";
+import Weather from "../client/components/Weather";
 
 import { MonoText } from "../client/components/StyledText";
 
@@ -22,6 +23,7 @@ export default function HomeScreen() {
       >
         <View style={styles.welcomeContainer}>
           <Clock />
+          <Weather />
         </View>
 
         <View style={styles.helpContainer}>
