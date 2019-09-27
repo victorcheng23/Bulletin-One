@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
 import MenuDrawer from "react-native-side-drawer";
+import { LinearGradient } from "expo-linear-gradient";
 
 class Weather extends React.Component {
   constructor(props) {
@@ -23,16 +24,21 @@ class Weather extends React.Component {
     };
     this.changeScale = this.changeScale.bind(this);
     this.toggleOpen = this.toggleOpen.bind(this);
-    this.drawerContent = this.drawerContent.bind(this);
   }
 
   toggleOpen() {
     this.setState({ settings: !this.state.settings });
   }
 
-  drawerContent() {
+  weather() {
     return (
-      <View>
+      <LinearGradient
+        colors={["#4c669f", "#3b5998", "#192f6a"]}
+        style={{
+          flex: 1,
+          alignItems: "center"
+        }}
+      >
         <Image
           style={{ width: 50, height: 50 }}
           source={{
@@ -61,7 +67,7 @@ class Weather extends React.Component {
         <TouchableOpacity onPress={this.toggleOpen} style={styles.animatedBox}>
           <Text>Settings</Text>
         </TouchableOpacity>
-      </View>
+      </LinearGradient>
     );
   }
 
@@ -93,15 +99,13 @@ class Weather extends React.Component {
         <View style={styles.container}>
           <MenuDrawer
             open={this.state.settings}
-            drawerContent={this.drawerContent()}
-            drawerPercentage={45}
+            drawerContent={this.weather()}
+            drawerPercentage={100}
             animationTime={250}
             overlay={false}
-            opacity={0.4}
+            opacity={1}
           >
-            <TouchableOpacity onPress={this.toggleOpen} style={styles.body}>
-              <Text>Open</Text>
-            </TouchableOpacity>
+            {this.weather()}
           </MenuDrawer>
         </View>
       );
