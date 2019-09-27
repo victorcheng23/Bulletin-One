@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
-import { registerRootComponent } from "expo";
+import Swiper from "react-native-swiper";
 
 class Weather extends React.Component {
   constructor(props) {
@@ -50,6 +50,48 @@ class Weather extends React.Component {
     if (this.props.weather.main) {
       return (
         <View style={styles.container}>
+          <Swiper
+            style={styles.wrapper}
+            dot={
+              <View
+                style={{
+                  backgroundColor: "rgba(255,255,255,.3)",
+                  width: 13,
+                  height: 13,
+                  borderRadius: 7,
+                  marginLeft: 7,
+                  marginRight: 7
+                }}
+              />
+            }
+            activeDot={
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  width: 13,
+                  height: 13,
+                  borderRadius: 7,
+                  marginLeft: 7,
+                  marginRight: 7
+                }}
+              />
+            }
+            paginationStyle={{
+              bottom: 70
+            }}
+            loop={false}
+          >
+            <View style={styles.slide}>
+              <Text>TESTESTESTESTESTESTESTESTESTEST 1</Text>
+            </View>
+            <View style={styles.slide}>
+              <Text>TESTESTESTESTESTESTESTESTESTEST 2</Text>
+            </View>
+            <View style={styles.slide}>
+              <Text>TESTESTESTESTESTESTESTESTESTEST 3</Text>
+            </View>
+          </Swiper>
+
           <Image
             style={{ width: 50, height: 50 }}
             source={{
@@ -112,5 +154,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 19,
     textAlign: "center"
+  },
+  wrapper: {
+    // backgroundColor: '#f00'
+  },
+  slide: {
+    flex: 1,
+    backgroundColor: "transparent"
+  },
+  container: {
+    flex: 1
+  },
+
+  imgBackground: {
+    backgroundColor: "transparent",
+    position: "absolute"
   }
 });
