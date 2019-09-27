@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
-import { registerRootComponent } from "expo";
+import MenuDrawer from "react-native-side-drawer";
 
 class Weather extends React.Component {
   constructor(props) {
@@ -22,6 +22,47 @@ class Weather extends React.Component {
       settings: false
     };
     this.changeScale = this.changeScale.bind(this);
+    this.toggleOpen = this.toggleOpen.bind(this);
+    this.drawerContent = this.drawerContent.bind(this);
+  }
+
+  toggleOpen() {
+    this.setState({ settings: !this.state.settings });
+  }
+
+  drawerContent() {
+    return (
+      <View>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={{
+            uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
+          }}
+        />
+        <Text>{this.props.weather.name}</Text>
+        <Text>
+          Current:
+          {` ${this.changeScale(this.props.weather.main.temp)}° ${
+            this.state.scale
+          }`}
+        </Text>
+        <Text>
+          Low:
+          {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
+            this.state.scale
+          }`}
+        </Text>
+        <Text>
+          High:
+          {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
+            this.state.scale
+          }`}
+        </Text>
+        <TouchableOpacity onPress={this.toggleOpen} style={styles.animatedBox}>
+          <Text>Settings</Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 
   componentWillUnmount() {
@@ -50,34 +91,18 @@ class Weather extends React.Component {
     if (this.props.weather.main) {
       return (
         <View style={styles.container}>
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={{
-              uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
-            }}
-          />
-          <Text>{this.props.weather.name}</Text>
-          <Text>
-            Current:
-            {` ${this.changeScale(this.props.weather.main.temp)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
-            Low:
-            {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
-            High:
-            {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <TouchableOpacity>
-            <Text>Settings</Text>
-          </TouchableOpacity>
+          <MenuDrawer
+            open={this.state.settings}
+            drawerContent={this.drawerContent()}
+            drawerPercentage={45}
+            animationTime={250}
+            overlay={false}
+            opacity={0.4}
+          >
+            <TouchableOpacity onPress={this.toggleOpen} style={styles.body}>
+              <Text>Open</Text>
+            </TouchableOpacity>
+          </MenuDrawer>
         </View>
       );
     } else {
