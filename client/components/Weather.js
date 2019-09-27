@@ -8,8 +8,8 @@ import {
   View
 } from "react-native";
 import { connect } from "react-redux";
+import { RobotoText } from "./StyledText";
 import { getWeatherThunk } from "../store/weather";
-import { registerRootComponent } from "expo";
 
 class Weather extends React.Component {
   constructor(props) {
@@ -51,33 +51,25 @@ class Weather extends React.Component {
       return (
         <View style={styles.container}>
           <Image
-            style={{ width: 50, height: 50 }}
+            style={{ width: 100, height: 100 }}
             source={{
               uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
             }}
           />
-          <Text>{this.props.weather.name}</Text>
-          <Text>
+          <RobotoText>{this.props.weather.name}</RobotoText>
+          <RobotoText>{this.props.weather.weather[0].description}</RobotoText>
+          <RobotoText>
             Current:
-            {` ${this.changeScale(this.props.weather.main.temp)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
+            {this.changeScale(this.props.weather.main.temp)}°
+          </RobotoText>
+          <RobotoText>
             Low:
-            {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
+            {this.changeScale(this.props.weather.main.temp_min)}°
+          </RobotoText>
+          <RobotoText>
             High:
-            {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <TouchableOpacity>
-            <Text>Settings</Text>
-          </TouchableOpacity>
+            {this.changeScale(this.props.weather.main.temp_max)}°
+          </RobotoText>
         </View>
       );
     } else {
@@ -105,12 +97,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.2)",
     width: "100%"
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center"
   }
 });
