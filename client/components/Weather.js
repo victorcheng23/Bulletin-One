@@ -58,13 +58,22 @@ class Weather extends React.Component {
           />
           <Text>{this.props.weather.name}</Text>
           <Text>
-            Current: {this.changeScale(this.props.weather.main.temp)}°
+            Current:
+            {` ${this.changeScale(this.props.weather.main.temp)}° ${
+              this.state.scale
+            }`}
           </Text>
           <Text>
-            Low: {this.changeScale(this.props.weather.main.temp_min)}°
+            Low:
+            {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
+              this.state.scale
+            }`}
           </Text>
           <Text>
-            High: {this.changeScale(this.props.weather.main.temp_max)}°
+            High:
+            {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
+              this.state.scale
+            }`}
           </Text>
           <TouchableOpacity>
             <Text>Settings</Text>
