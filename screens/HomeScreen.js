@@ -9,12 +9,13 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
+
+import { MonoText } from "../client/components/StyledText";
+import { LinearGradient } from "expo-linear-gradient";
 import Clock from "../client/components/Clock";
 import Weather from "../client/components/Weather";
 
-import { MonoText } from "../client/components/StyledText";
-import { RobotoText } from "../client/components/StyledText";
-import { LinearGradient } from "expo-linear-gradient";
+let time = new Date().toLocaleString();
 
 export default function HomeScreen() {
   return (
@@ -25,17 +26,13 @@ export default function HomeScreen() {
         alignItems: "center"
       }}
     >
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer}>
-            <Clock />
-            <Weather />
-          </View>
-        </ScrollView>
-      </View>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <Clock />
+        <Weather />
+      </ScrollView>
     </LinearGradient>
   );
 }
@@ -48,48 +45,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center"
-  },
   contentContainer: {
-    paddingTop: 30
-  },
-  welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: "contain",
-    marginTop: 3,
-    marginLeft: -10
-  },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50
-  },
-  homeScreenFilename: {
-    marginVertical: 7
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)"
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4
-  },
-  getStartedText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    lineHeight: 24,
-    textAlign: "center"
+    paddingTop: 50
   },
   tabBarInfoContainer: {
     position: "absolute",

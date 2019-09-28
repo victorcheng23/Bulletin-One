@@ -1,5 +1,5 @@
 import axios from "axios";
-const APIKey = require("../../secrets");
+const { OpenWeatherAPIKey } = require("../../secrets");
 const openWeatherAPI = "https://api.openweathermap.org/data/2.5/";
 
 //ACTION TYPES
@@ -16,7 +16,7 @@ export const getWeatherThunk = (city, country) => {
   return async dispatch => {
     try {
       const { data } = await axios.get(
-        `${openWeatherAPI}weather?q=${city},${country}&APPID=${APIKey}`
+        `${openWeatherAPI}weather?q=${city},${country}&APPID=${OpenWeatherAPIKey}`
       );
       dispatch(getWeather(data));
     } catch (error) {

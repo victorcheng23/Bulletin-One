@@ -47,21 +47,34 @@ class Weather extends React.Component {
     }
   }
 
+  titleCase(str) {
+    if (str.includes(" ")) {
+      return str
+        .split(" ")
+        .map(word => {
+          return word[0].toUpperCase() + word.slice(1);
+        })
+        .join(" ");
+    } else return str[0].toUpperCase() + str.slice(1);
+  }
+
   weather() {
     return (
-      <View>
-        <RobotoText style={{ textAlign: "center", fontSize: 18 }}>
-          {this.props.weather.weather[0].description}
+      <View style={{ alignItems: "center" }}>
+        <RobotoText style={{ fontSize: 18 }}>
+          {this.titleCase(this.props.weather.weather[0].description)}
         </RobotoText>
-        <RobotoText style={{ textAlign: "center", fontSize: 90 }}>
-          {` ${this.changeScale(this.props.weather.main.temp)}°`}
+        <RobotoText style={{ fontSize: 90 }}>
+          <RobotoText style={styles.transparent}>°</RobotoText>
+          {`${this.changeScale(this.props.weather.main.temp)}°`}
         </RobotoText>
         <View style={styles.row}>
           <View>
             <RobotoText
               style={{ textAlign: "center", fontSize: 25, marginRight: 5 }}
             >
-              {` ${this.changeScale(this.props.weather.main.temp_max)}°`}
+              <RobotoText style={styles.transparent}>°</RobotoText>
+              {`${this.changeScale(this.props.weather.main.temp_max)}°`}
             </RobotoText>
             <RobotoText
               style={{
@@ -78,7 +91,8 @@ class Weather extends React.Component {
             <RobotoText
               style={{ textAlign: "center", fontSize: 25, marginLeft: 5 }}
             >
-              {` ${this.changeScale(this.props.weather.main.temp_min)}°`}
+              <RobotoText style={styles.transparent}>°</RobotoText>
+              {`${this.changeScale(this.props.weather.main.temp_min)}°`}
             </RobotoText>
             <RobotoText
               style={{
@@ -121,7 +135,8 @@ class Weather extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  weather: state.weather
+  weather: state.weather,
+  location: state.location
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -146,6 +161,9 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     // backgroundColor: '#f00'
+  },
+  transparent: {
+    opacity: 0
   },
   slide: {
     flex: 1,
