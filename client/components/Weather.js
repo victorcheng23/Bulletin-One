@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
-import { registerRootComponent } from "expo";
+import Swiper from "react-native-swiper";
+import { RobotoText } from "./StyledText";
 
 class Weather extends React.Component {
   constructor(props) {
@@ -46,38 +47,71 @@ class Weather extends React.Component {
     }
   }
 
+  weather() {
+    return (
+      <View>
+        <RobotoText style={{ textAlign: "center", fontSize: 18 }}>
+          {this.props.weather.weather[0].description}
+        </RobotoText>
+        <RobotoText style={{ textAlign: "center", fontSize: 90 }}>
+          {` ${this.changeScale(this.props.weather.main.temp)}°`}
+        </RobotoText>
+        <View style={styles.row}>
+          <View>
+            <RobotoText
+              style={{ textAlign: "center", fontSize: 25, marginRight: 5 }}
+            >
+              {` ${this.changeScale(this.props.weather.main.temp_max)}°`}
+            </RobotoText>
+            <RobotoText
+              style={{
+                textAlign: "center",
+                fontSize: 14,
+                marginRight: 5,
+                opacity: 0.4
+              }}
+            >
+              Max
+            </RobotoText>
+          </View>
+          <View>
+            <RobotoText
+              style={{ textAlign: "center", fontSize: 25, marginLeft: 5 }}
+            >
+              {` ${this.changeScale(this.props.weather.main.temp_min)}°`}
+            </RobotoText>
+            <RobotoText
+              style={{
+                textAlign: "center",
+                fontSize: 14,
+                marginLeft: 5,
+                opacity: 0.4
+              }}
+            >
+              Min
+            </RobotoText>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   render() {
     if (this.props.weather.main) {
       return (
         <View style={styles.container}>
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={{
-              uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
+          <Swiper
+            style={styles.wrapper}
+            paginationStyle={{
+              bottom: 70
             }}
-          />
-          <Text>{this.props.weather.name}</Text>
-          <Text>
-            Current:
-            {` ${this.changeScale(this.props.weather.main.temp)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
-            Low:
-            {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
-            High:
-            {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <TouchableOpacity>
-            <Text>Settings</Text>
-          </TouchableOpacity>
+            loop={false}
+          >
+            <View style={styles.slide}>{this.weather()}</View>
+            <View style={styles.slide}>
+              <Text>TESTESTESTESTESTESTESTESTESTEST 2</Text>
+            </View>
+          </Swiper>
         </View>
       );
     } else {
@@ -106,11 +140,24 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.2)",
     width: "100%"
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center"
+  row: {
+    flexDirection: "row",
+    justifyContent: "center"
+  },
+  wrapper: {
+    // backgroundColor: '#f00'
+  },
+  slide: {
+    flex: 1,
+    backgroundColor: "transparent",
+    color: "#fff"
+  },
+  container: {
+    flex: 1
+  },
+
+  imgBackground: {
+    backgroundColor: "transparent",
+    position: "absolute"
   }
 });
