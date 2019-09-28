@@ -8,5 +8,10 @@ export function MonoText(props) {
 }
 
 export function RobotoText(props) {
-  return <Text {...props} style={[props.style, { fontFamily: "roboto" }]} />;
+  return (
+    <Text
+      {...props}
+      style={[props.style, { fontFamily: "roboto", color: "#fff" }]}
+    />
+  );
 }

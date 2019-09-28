@@ -50,39 +50,48 @@ class Weather extends React.Component {
   weather() {
     return (
       <View>
-        <Image
-          style={{ width: 50, height: 50 }}
-          source={{
-            uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
-          }}
-        />
-        <RobotoText style={styles.lightText}>
+        <RobotoText style={{ textAlign: "center", fontSize: 18 }}>
           {this.props.weather.weather[0].description}
         </RobotoText>
-        <RobotoText style={styles.lightText}>
-          {this.props.weather.name}
+        <RobotoText style={{ textAlign: "center", fontSize: 90 }}>
+          {` ${this.changeScale(this.props.weather.main.temp)}°`}
         </RobotoText>
-        <RobotoText style={styles.lightText}>
-          Current:
-          {` ${this.changeScale(this.props.weather.main.temp)}° ${
-            this.state.scale
-          }`}
-        </RobotoText>
-        <RobotoText style={styles.lightText}>
-          Low:
-          {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
-            this.state.scale
-          }`}
-        </RobotoText>
-        <RobotoText style={styles.lightText}>
-          High:
-          {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
-            this.state.scale
-          }`}
-        </RobotoText>
-        <TouchableOpacity>
-          <RobotoText style={styles.lightText}>Settings</RobotoText>
-        </TouchableOpacity>
+        <View style={styles.row}>
+          <View>
+            <RobotoText
+              style={{ textAlign: "center", fontSize: 25, marginRight: 5 }}
+            >
+              {` ${this.changeScale(this.props.weather.main.temp_max)}°`}
+            </RobotoText>
+            <RobotoText
+              style={{
+                textAlign: "center",
+                fontSize: 14,
+                marginRight: 5,
+                opacity: 0.4
+              }}
+            >
+              Max
+            </RobotoText>
+          </View>
+          <View>
+            <RobotoText
+              style={{ textAlign: "center", fontSize: 25, marginLeft: 5 }}
+            >
+              {` ${this.changeScale(this.props.weather.main.temp_min)}°`}
+            </RobotoText>
+            <RobotoText
+              style={{
+                textAlign: "center",
+                fontSize: 14,
+                marginLeft: 5,
+                opacity: 0.4
+              }}
+            >
+              Min
+            </RobotoText>
+          </View>
+        </View>
       </View>
     );
   }
@@ -131,12 +140,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.2)",
     width: "100%"
   },
-  lightText: {
-    marginBottom: 20,
-    color: "#fff",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center"
+  row: {
+    flexDirection: "row",
+    justifyContent: "center"
   },
   wrapper: {
     // backgroundColor: '#f00'
