@@ -10,6 +10,7 @@ import {
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
 import Swiper from "react-native-swiper";
+import { RobotoText } from "./StyledText";
 
 class Weather extends React.Component {
   constructor(props) {
@@ -46,80 +47,62 @@ class Weather extends React.Component {
     }
   }
 
+  weather() {
+    return (
+      <View>
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={{
+            uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
+          }}
+        />
+        <RobotoText style={styles.lightText}>
+          {this.props.weather.weather[0].description}
+        </RobotoText>
+        <RobotoText style={styles.lightText}>
+          {this.props.weather.name}
+        </RobotoText>
+        <RobotoText style={styles.lightText}>
+          Current:
+          {` ${this.changeScale(this.props.weather.main.temp)}° ${
+            this.state.scale
+          }`}
+        </RobotoText>
+        <RobotoText style={styles.lightText}>
+          Low:
+          {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
+            this.state.scale
+          }`}
+        </RobotoText>
+        <RobotoText style={styles.lightText}>
+          High:
+          {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
+            this.state.scale
+          }`}
+        </RobotoText>
+        <TouchableOpacity>
+          <RobotoText style={styles.lightText}>Settings</RobotoText>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   render() {
     if (this.props.weather.main) {
       return (
         <View style={styles.container}>
           <Swiper
             style={styles.wrapper}
-            dot={
-              <View
-                style={{
-                  backgroundColor: "rgba(255,255,255,.3)",
-                  width: 13,
-                  height: 13,
-                  borderRadius: 7,
-                  marginLeft: 7,
-                  marginRight: 7
-                }}
-              />
-            }
-            activeDot={
-              <View
-                style={{
-                  backgroundColor: "#fff",
-                  width: 13,
-                  height: 13,
-                  borderRadius: 7,
-                  marginLeft: 7,
-                  marginRight: 7
-                }}
-              />
-            }
             paginationStyle={{
               bottom: 70
             }}
             loop={false}
           >
-            <View style={styles.slide}>
-              <Text>TESTESTESTESTESTESTESTESTESTEST 1</Text>
-            </View>
+            <View style={styles.slide}>{this.weather()}</View>
             <View style={styles.slide}>
               <Text>TESTESTESTESTESTESTESTESTESTEST 2</Text>
             </View>
-            <View style={styles.slide}>
-              <Text>TESTESTESTESTESTESTESTESTESTEST 3</Text>
-            </View>
           </Swiper>
-
-          <Image
-            style={{ width: 50, height: 50 }}
-            source={{
-              uri: `https://openweathermap.org/img/wn/${this.props.weather.weather[0].icon}@2x.png`
-            }}
-          />
-          <Text>{this.props.weather.name}</Text>
-          <Text>
-            Current:
-            {` ${this.changeScale(this.props.weather.main.temp)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
-            Low:
-            {` ${this.changeScale(this.props.weather.main.temp_min)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <Text>
-            High:
-            {` ${this.changeScale(this.props.weather.main.temp_max)}° ${
-              this.state.scale
-            }`}
-          </Text>
-          <TouchableOpacity>
-            <Text>Settings</Text>
-          </TouchableOpacity>
         </View>
       );
     } else {
@@ -148,9 +131,9 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(0,0,0,0.2)",
     width: "100%"
   },
-  developmentModeText: {
+  lightText: {
     marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
+    color: "#fff",
     fontSize: 14,
     lineHeight: 19,
     textAlign: "center"
@@ -160,7 +143,8 @@ const styles = StyleSheet.create({
   },
   slide: {
     flex: 1,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
+    color: "#fff"
   },
   container: {
     flex: 1
