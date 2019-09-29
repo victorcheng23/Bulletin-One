@@ -4,7 +4,6 @@ import {
   Dimensions,
   Image,
   StyleSheet,
-  Switch,
   Text,
   TextInput,
   TouchableOpacity,
@@ -13,6 +12,12 @@ import {
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
 import Swiper from "react-native-swiper";
+import { Switch } from "react-native-switch";
+import RadioForm, {
+  RadioButton,
+  RadioButtonInput,
+  RadioButtonLabel
+} from "react-native-simple-radio-button";
 import { RobotoText } from "./StyledText";
 
 class Weather extends React.Component {
@@ -120,17 +125,40 @@ class Weather extends React.Component {
           height: 100
         }}
       >
+        <RadioForm
+          radio_props={[
+            { label: "C", value: "C" },
+            { label: "F", value: "F" },
+            { label: "K", value: "K" }
+          ]}
+          initial={0}
+          formHorizontal={true}
+          labelHorizontal={true}
+          buttonColor={"#50C900"}
+          labelColor={"#50C900"}
+          animation={true}
+          onPress={value => {
+            this.setState({ scale: value });
+          }}
+        />
         <Switch
           value={this.state.autoLocation}
           onValueChange={this.toggleLocation}
+          activeText={"On"}
+          inActiveText={"Off"}
+          circleBorderWidth={0}
+          backgroundActive={"rgba(255, 255, 255, 0.5)"}
+          backgroundInactive={"rgba(255, 255, 255, 0.2)"}
+          circleInActiveColor={"rgba(255, 255, 255, 0.5)"}
         />
-        <Switch />
         <TextInput
           style={{
-            height: 40,
+            padding: 10,
+            color: "#fff",
+            fontFamily: "roboto",
             width: Dimensions.get("window").width * 0.85,
-            borderColor: "gray",
-            borderWidth: 1
+            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            borderRadius: 10
           }}
         />
       </View>
@@ -143,7 +171,7 @@ class Weather extends React.Component {
         <View style={styles.container}>
           <Swiper
             style={styles.wrapper}
-            index={1}
+            index={0}
             paginationStyle={{
               bottom: 70
             }}
