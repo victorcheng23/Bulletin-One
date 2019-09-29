@@ -49,16 +49,16 @@ class HomeScreen extends React.Component {
   }
 
   getBackground(time) {
-    if (time >= 20 || time <= 3) {
+    if (time >= 21 || time <= 3) {
       return bg.a5;
     }
-    if (time === 4 || time === 5 || time === 19) {
+    if (time === 4 || time === 5 || time === 19 || time === 20) {
       return bg.a4;
     }
-    if (time === 6 || time === 7 || (time === 17 || time === 18)) {
+    if (time === 6 || time === 7 || time === 17 || time === 18) {
       return bg.a3;
     }
-    if (time === 8 || time === 9 || (time === 16 || time === 15)) {
+    if (time === 8 || time === 9 || time === 16 || time === 15) {
       return bg.a2;
     }
     if (time > 9 && time < 15) {

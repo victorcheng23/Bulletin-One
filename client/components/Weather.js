@@ -1,9 +1,12 @@
 import React from "react";
 import {
   Animated,
+  Dimensions,
   Image,
   StyleSheet,
+  Switch,
   Text,
+  TextInput,
   TouchableOpacity,
   View
 } from "react-native";
@@ -17,13 +20,16 @@ class Weather extends React.Component {
     super(props);
 
     this.state = {
-      scale: "F"
+      scale: "F",
+      autoLocation: false
     };
     this.changeScale = this.changeScale.bind(this);
+    this.toggleLocation = this.toggleLocation.bind(this);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
+  toggleLocation(value) {
+    this.setState({ autoLocation: value });
+    console.log("Switch 1 is: " + this.state.autoLocation);
   }
 
   changeScale(temperature) {
@@ -51,6 +57,11 @@ class Weather extends React.Component {
   weather() {
     return (
       <View style={{ alignItems: "center" }}>
+        <TouchableOpacity>
+          <RobotoText style={{ fontSize: 23, marginBottom: 5 }}>
+            {this.titleCase(this.props.weather.name)}
+          </RobotoText>
+        </TouchableOpacity>
         <RobotoText style={{ fontSize: 18 }}>
           {this.titleCase(this.props.weather.weather[0].description)}
         </RobotoText>
@@ -100,21 +111,49 @@ class Weather extends React.Component {
     );
   }
 
+  settings() {
+    return (
+      <View
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          height: 100
+        }}
+      >
+        <Switch
+          value={this.state.autoLocation}
+          onValueChange={this.toggleLocation}
+        />
+        <Switch />
+        <TextInput
+          style={{
+            height: 40,
+            width: Dimensions.get("window").width * 0.85,
+            borderColor: "gray",
+            borderWidth: 1
+          }}
+        />
+      </View>
+    );
+  }
+
   render() {
     if (this.props.weather.main) {
       return (
         <View style={styles.container}>
           <Swiper
             style={styles.wrapper}
+            index={1}
             paginationStyle={{
               bottom: 70
             }}
             loop={false}
             showsPagination={false}
           >
+            <View style={styles.slide}>{this.settings()}</View>
             <View style={styles.slide}>{this.weather()}</View>
             <View style={styles.slide}>
-              <RobotoText>TESTESTESTESTESTESTESTESTESTEST 2</RobotoText>
+              <RobotoText style={{ textAlign: "center" }}>TEST</RobotoText>
             </View>
           </Swiper>
         </View>
