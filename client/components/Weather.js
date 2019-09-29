@@ -17,10 +17,7 @@ class Weather extends React.Component {
     super(props);
 
     this.state = {
-      city: "New York",
-      country: "US",
-      scale: "F",
-      settings: false
+      scale: "F"
     };
     this.changeScale = this.changeScale.bind(this);
   }
@@ -74,7 +71,7 @@ class Weather extends React.Component {
                 textAlign: "center",
                 fontSize: 14,
                 marginRight: 5,
-                opacity: 0.4
+                opacity: 0.6
               }}
             >
               High
@@ -92,7 +89,7 @@ class Weather extends React.Component {
                 textAlign: "center",
                 fontSize: 14,
                 marginLeft: 5,
-                opacity: 0.4
+                opacity: 0.6
               }}
             >
               Low
@@ -123,7 +120,7 @@ class Weather extends React.Component {
         </View>
       );
     } else {
-      return <Text>Loading...</Text>;
+      return <View></View>;
     }
   }
 }

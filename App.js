@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./client/store";
 
 import AppNavigator from "./navigation/AppNavigator";
+import HomeScreen from "./screens/HomeScreen";
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -25,7 +26,7 @@ export default function App(props) {
       <Provider store={store}>
         <View style={styles.container}>
           {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
-          <AppNavigator />
+          <HomeScreen />
         </View>
       </Provider>
     );

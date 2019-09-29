@@ -11,8 +11,6 @@ class Clock extends React.Component {
     super(props);
 
     this.state = {
-      city: "New York",
-      country: "US",
       time: " :00 AM",
       date: "",
       day: ""
@@ -23,17 +21,7 @@ class Clock extends React.Component {
     clearInterval(this.timer);
   }
 
-  componentDidMount() {
-    this.props.getWeather(this.state.city, this.state.country);
-  }
-
   componentDidUpdate(prevProps) {
-    if (this.props.weather !== prevProps.weather) {
-      this.props.getTimezone(
-        this.props.weather.coord.lat,
-        this.props.weather.coord.lon
-      );
-    }
     if (this.props.timezone !== prevProps.timezone) {
       const offset =
         this.props.timezone.timezone_offset +
@@ -72,6 +60,8 @@ class Clock extends React.Component {
     }
   }
 
+  componentDidMount() {}
+
   render() {
     return (
       <View style={{ alignItems: "center", marginBottom: 15 }}>
@@ -85,7 +75,7 @@ class Clock extends React.Component {
         >
           <View>
             <RobotoText style={{ fontSize: 20 }}>{this.state.day}</RobotoText>
-            <RobotoText style={{ fontSize: 17, opacity: 0.4 }}>
+            <RobotoText style={{ fontSize: 17, opacity: 0.6 }}>
               {this.state.date.slice(0, -6)}
             </RobotoText>
           </View>
@@ -99,7 +89,7 @@ class Clock extends React.Component {
               <RobotoText style={{ fontSize: 15 }}>
                 {this.state.time.slice(-2)}
               </RobotoText>
-              <RobotoText style={{ fontSize: 20, opacity: 0.4 }}>
+              <RobotoText style={{ fontSize: 20, opacity: 0.6 }}>
                 {this.state.time.slice(-5, -3)}
               </RobotoText>
             </View>
@@ -115,12 +105,4 @@ const mapStateToProps = state => ({
   timezone: state.timezone
 });
 
-const mapDispatchToProps = dispatch => ({
-  getTimezone: (lat, long) => dispatch(getTimezoneThunk(lat, long)),
-  getWeather: (city, country) => dispatch(getWeatherThunk(city, country))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Clock);
+export default connect(mapStateToProps)(Clock);
