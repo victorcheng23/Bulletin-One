@@ -9,32 +9,32 @@ import {
   TouchableOpacity,
   View
 } from "react-native";
-
-import { MonoText } from "../client/components/StyledText";
+import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import Clock from "../client/components/Clock";
 import Weather from "../client/components/Weather";
+import { getTimezoneThunk } from "../client/store/timezone";
 
-let time = new Date().toLocaleString();
-
-export default function HomeScreen() {
-  return (
-    <LinearGradient
-      colors={["#15304c", "#316573", "#6baba2"]}
-      style={{
-        flex: 1,
-        alignItems: "center"
-      }}
-    >
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}
+export default class HomeScreen extends React.Component {
+  render() {
+    return (
+      <LinearGradient
+        colors={["#15304c", "#6baba2"]}
+        style={{
+          flex: 1,
+          alignItems: "center"
+        }}
       >
-        <Clock />
-        <Weather />
-      </ScrollView>
-    </LinearGradient>
-  );
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <Clock />
+          <Weather />
+        </ScrollView>
+      </LinearGradient>
+    );
+  }
 }
 
 HomeScreen.navigationOptions = {

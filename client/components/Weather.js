@@ -29,13 +29,6 @@ class Weather extends React.Component {
     clearInterval(this.timer);
   }
 
-  componentDidMount() {
-    this.props.getWeather(this.state.city, this.state.country);
-    this.timer = setInterval(() => {
-      this.props.getWeather(this.state.city, this.state.country);
-    }, 600000);
-  }
-
   changeScale(temperature) {
     switch (this.state.scale) {
       case "F":
@@ -84,7 +77,7 @@ class Weather extends React.Component {
                 opacity: 0.4
               }}
             >
-              Max
+              High
             </RobotoText>
           </View>
           <View>
@@ -102,7 +95,7 @@ class Weather extends React.Component {
                 opacity: 0.4
               }}
             >
-              Min
+              Low
             </RobotoText>
           </View>
         </View>
@@ -120,10 +113,11 @@ class Weather extends React.Component {
               bottom: 70
             }}
             loop={false}
+            showsPagination={false}
           >
             <View style={styles.slide}>{this.weather()}</View>
             <View style={styles.slide}>
-              <Text>TESTESTESTESTESTESTESTESTESTEST 2</Text>
+              <RobotoText>TESTESTESTESTESTESTESTESTESTEST 2</RobotoText>
             </View>
           </Swiper>
         </View>
@@ -139,14 +133,7 @@ const mapStateToProps = state => ({
   location: state.location
 });
 
-const mapDispatchToProps = dispatch => ({
-  getWeather: (city, country) => dispatch(getWeatherThunk(city, country))
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Weather);
+export default connect(mapStateToProps)(Weather);
 
 //STYLING
 const styles = StyleSheet.create({
