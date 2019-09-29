@@ -32,9 +32,12 @@ class Weather extends React.Component {
     this.toggleLocation = this.toggleLocation.bind(this);
   }
 
+  handleSubmit(value) {
+    console.log("INPUT: ", value.nativeEvent.text);
+  }
+
   toggleLocation(value) {
     this.setState({ autoLocation: value });
-    console.log("Switch 1 is: " + this.state.autoLocation);
   }
 
   changeScale(temperature) {
@@ -160,6 +163,7 @@ class Weather extends React.Component {
             backgroundColor: "rgba(255, 255, 255, 0.2)",
             borderRadius: 10
           }}
+          onSubmitEditing={value => this.handleSubmit(value)}
         />
       </View>
     );
