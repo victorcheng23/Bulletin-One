@@ -15,3 +15,21 @@ export function RobotoText(props) {
     />
   );
 }
+
+export function RobotoMedText(props) {
+  return (
+    <Text
+      {...props}
+      style={[props.style, { fontFamily: "roboto-med", color: "#fff" }]}
+    />
+  );
+}
+
+export function RobotoRegText(props) {
+  return (
+    <Text
+      {...props}
+      style={[props.style, { fontFamily: "roboto-reg", color: "#fff" }]}
+    />
+  );
+}

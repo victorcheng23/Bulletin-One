@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import store from "./client/store";
 
 import AppNavigator from "./navigation/AppNavigator";
+import HomeScreen from "./screens/HomeScreen";
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -24,8 +25,8 @@ export default function App(props) {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-          <AppNavigator />
+          {Platform.OS === "ios" && <StatusBar barStyle="light-content" />}
+          <HomeScreen />
         </View>
       </Provider>
     );
@@ -44,6 +45,8 @@ async function loadResourcesAsync() {
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
       roboto: require("./assets/fonts/Roboto-Light.ttf"),
+      "roboto-med": require("./assets/fonts/Roboto-Medium.ttf"),
+      "roboto-reg": require("./assets/fonts/Roboto-Regular.ttf"),
       "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
     })
   ]);
