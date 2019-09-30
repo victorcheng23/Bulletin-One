@@ -31,7 +31,7 @@ class Weather extends React.Component {
   }
 
   handleSubmit(value) {
-    if (value.length) {
+    if (value.nativeEvent.text) {
       this.props.setCity(value.nativeEvent.text);
     }
   }
