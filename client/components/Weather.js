@@ -24,7 +24,8 @@ class Weather extends React.Component {
 
     this.state = {
       scale: "F",
-      autoLocation: false
+      autoLocation: true,
+      fadeInput: new Animated.Value(0)
     };
     this.changeScale = this.changeScale.bind(this);
     this.toggleLocation = this.toggleLocation.bind(this);
@@ -38,6 +39,10 @@ class Weather extends React.Component {
 
   toggleLocation(value) {
     this.setState({ autoLocation: value });
+    Animated.timing(this.state.fadeInput, {
+      toValue: value ? 0 : 1,
+      duration: 500
+    }).start();
   }
 
   changeScale(temperature) {
@@ -258,11 +263,12 @@ class Weather extends React.Component {
           </View>
         </View>
 
-        <View
+        <Animated.View
           style={{
             width: Dimensions.get("window").width * 0.85,
             backgroundColor: "rgba(255, 255, 255, 0.2)",
-            borderRadius: 10
+            borderRadius: 10,
+            opacity: this.state.fadeInput
           }}
         >
           <TextInput
@@ -275,7 +281,7 @@ class Weather extends React.Component {
             onSubmitEditing={value => this.handleSubmit(value)}
             defaultValue={this.props.weather.name}
           />
-        </View>
+        </Animated.View>
       </View>
     );
   }
