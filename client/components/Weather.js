@@ -8,7 +8,7 @@ import {
   View
 } from "react-native";
 import { connect } from "react-redux";
-import { setCityActionCreator } from "../store/location";
+import { setCityActionCreator, getLocationThunk } from "../store/location";
 import Swiper from "react-native-swiper";
 import { Switch } from "react-native-switch";
 import RadioForm, {
@@ -24,8 +24,8 @@ class Weather extends React.Component {
 
     this.state = {
       scale: "F",
-      autoLocation: true,
-      fadeInput: new Animated.Value(0)
+      autoLocation: false,
+      fadeInput: new Animated.Value(1)
     };
     this.changeScale = this.changeScale.bind(this);
     this.toggleLocation = this.toggleLocation.bind(this);
@@ -43,6 +43,11 @@ class Weather extends React.Component {
       toValue: value ? 0 : 1,
       duration: 500
     }).start();
+    setTimeout(() => {
+      if (this.state.autoLocation) {
+        this.props.getGeo();
+      }
+    }, 0);
   }
 
   changeScale(temperature) {
@@ -292,7 +297,7 @@ class Weather extends React.Component {
         <View style={styles.container}>
           <Swiper
             style={styles.wrapper}
-            index={0}
+            index={1}
             paginationStyle={{
               bottom: 70
             }}
@@ -302,7 +307,9 @@ class Weather extends React.Component {
             <View style={styles.slide}>{this.settings()}</View>
             <View style={styles.slide}>{this.weather()}</View>
             <View style={styles.slide}>
-              <RobotoText style={{ textAlign: "center" }}>TEST</RobotoText>
+              <RobotoText style={{ textAlign: "center", fontSize: 20 }}>
+                Some Other Stuff
+              </RobotoText>
             </View>
           </Swiper>
         </View>
@@ -321,6 +328,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setCity: city => {
     dispatch(setCityActionCreator(city));
+  },
+  getGeo: () => {
+    dispatch(getLocationThunk());
   }
 });
 

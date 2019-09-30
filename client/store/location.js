@@ -20,7 +20,7 @@ export const getLocationThunk = () => {
       const { data } = await axios.get(
         `${IPGeolocationAPI}${IPGeolocationAPIKey}`
       );
-      dispatch(getLocation(data));
+      dispatch(getLocationActionCreator(data));
     } catch (error) {
       console.error(error);
     }
