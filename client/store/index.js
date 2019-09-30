@@ -3,7 +3,7 @@ import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import weather from "./weather";
-import location from "./geolocation";
+import location from "./location";
 import timezone from "./timezone";
 
 const reducer = combineReducers({ weather, location, timezone });

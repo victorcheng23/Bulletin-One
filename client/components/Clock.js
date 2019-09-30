@@ -13,7 +13,8 @@ class Clock extends React.Component {
     this.state = {
       time: " :00 AM",
       date: "",
-      day: ""
+      day: "",
+      offset: 0
     };
   }
 
@@ -21,46 +22,49 @@ class Clock extends React.Component {
     clearInterval(this.timer);
   }
 
+  componentDidMount() {}
+
   componentDidUpdate(prevProps) {
     if (this.props.timezone !== prevProps.timezone) {
-      const offset =
-        this.props.timezone.timezone_offset +
-        (this.props.timezone.is_dst ? this.props.timezone.dst_savings : 0);
+      this.setState({
+        offset:
+          this.props.timezone.timezone_offset +
+          (this.props.timezone.is_dst ? this.props.timezone.dst_savings : 0)
+      });
 
       this.setState({
         time: moment
           .utc()
-          .utcOffset(offset)
+          .utcOffset(this.state.offset)
           .format("LTS"),
         date: moment
           .utc()
-          .utcOffset(offset)
+          .utcOffset(this.state.offset)
           .format("LL"),
         day: moment
           .utc()
-          .utcOffset(offset)
+          .utcOffset(this.state.offset)
           .format("dddd")
       });
+
       this.timer = setInterval(() => {
         this.setState({
           time: moment
             .utc()
-            .utcOffset(offset)
+            .utcOffset(this.state.offset)
             .format("LTS"),
           date: moment
             .utc()
-            .utcOffset(offset)
+            .utcOffset(this.state.offset)
             .format("LL"),
           day: moment
             .utc()
-            .utcOffset(offset)
+            .utcOffset(this.state.offset)
             .format("dddd")
         });
       }, 1000);
     }
   }
-
-  componentDidMount() {}
 
   render() {
     return (

@@ -30,22 +30,28 @@ class HomeScreen extends React.Component {
     super(props);
 
     this.state = {
-      city: "New York",
-      country: "US"
+      city: "New York"
     };
   }
 
   componentDidMount() {
-    this.props.getWeather(this.state.city, this.state.country);
+    setTimeout(() => {
+      this.props.getWeather(this.state.city);
+      this.props.getTimezone(this.state.city);
+    }, 0);
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.weather !== prevProps.weather) {
-      this.props.getTimezone(
-        this.props.weather.coord.lat,
-        this.props.weather.coord.lon
-      );
+    if (this.props.location !== prevProps.location) {
+      this.setState(this.props.location);
+      setTimeout(() => {
+        this.props.getWeather(this.state.city);
+        this.props.getTimezone(this.state.city);
+      }, 0);
     }
+    // if (this.props.weather !== prevProps.weather) {
+    //   this.props.getTimezone(this.state.city);
+    // }
   }
 
   getBackground(time) {
@@ -98,12 +104,13 @@ class HomeScreen extends React.Component {
 
 const mapStateToProps = state => ({
   weather: state.weather,
-  timezone: state.timezone
+  timezone: state.timezone,
+  location: state.location
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTimezone: (lat, long) => dispatch(getTimezoneThunk(lat, long)),
-  getWeather: (city, country) => dispatch(getWeatherThunk(city, country))
+  getTimezone: city => dispatch(getTimezoneThunk(city)),
+  getWeather: city => dispatch(getWeatherThunk(city))
 });
 
 export default connect(

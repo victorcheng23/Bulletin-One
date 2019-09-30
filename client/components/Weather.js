@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { getWeatherThunk } from "../store/weather";
+import { setCityActionCreator } from "../store/location";
 import Swiper from "react-native-swiper";
 import { Switch } from "react-native-switch";
 import RadioForm, {
@@ -34,6 +35,7 @@ class Weather extends React.Component {
 
   handleSubmit(value) {
     console.log("INPUT: ", value.nativeEvent.text);
+    this.props.setCity(value.nativeEvent.text);
   }
 
   toggleLocation(value) {
@@ -201,7 +203,16 @@ const mapStateToProps = state => ({
   location: state.location
 });
 
-export default connect(mapStateToProps)(Weather);
+const mapDispatchToProps = dispatch => ({
+  setCity: city => {
+    dispatch(setCityActionCreator(city));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Weather);
 
 //STYLING
 const styles = StyleSheet.create({

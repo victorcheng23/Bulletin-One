@@ -1,5 +1,7 @@
 import axios from "axios";
 const { IPGeolocationAPIKey } = require("../../secrets");
+const { OpenWeatherAPIKey } = require("../../secrets");
+const openWeatherAPI = "https://api.openweathermap.org/data/2.5/";
 const IPGeolocationAPI = "https://api.ipgeolocation.io/timezone?apiKey=";
 
 //ACTION TYPES
@@ -12,13 +14,16 @@ const timezone = {};
 const getTimezone = timezone => ({ type: GET_TIMEZONE, timezone });
 
 //THUNK CREATORS
-export const getTimezoneThunk = (lat, long) => {
+export const getTimezoneThunk = city => {
   return async dispatch => {
     try {
-      const { data } = await axios.get(
-        `${IPGeolocationAPI}${IPGeolocationAPIKey}&lat=${lat}&long=${long}`
+      const { data: weather } = await axios.get(
+        `${openWeatherAPI}weather?q=${city}&APPID=${OpenWeatherAPIKey}`
       );
-      dispatch(getTimezone(data));
+      const { data: tz } = await axios.get(
+        `${IPGeolocationAPI}${IPGeolocationAPIKey}&lat=${weather.coord.lat}&long=${weather.coord.lon}`
+      );
+      dispatch(getTimezone(tz));
     } catch (error) {
       console.error(error);
     }

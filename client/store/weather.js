@@ -12,11 +12,11 @@ const weather = {};
 const getWeather = weather => ({ type: GET_WEATHER, weather });
 
 //THUNK CREATORS
-export const getWeatherThunk = (city, country) => {
+export const getWeatherThunk = city => {
   return async dispatch => {
     try {
       const { data } = await axios.get(
-        `${openWeatherAPI}weather?q=${city},${country}&APPID=${OpenWeatherAPIKey}`
+        `${openWeatherAPI}weather?q=${city}&APPID=${OpenWeatherAPIKey}`
       );
       dispatch(getWeather(data));
     } catch (error) {
