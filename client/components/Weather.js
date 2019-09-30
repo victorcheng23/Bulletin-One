@@ -2,15 +2,12 @@ import React from "react";
 import {
   Animated,
   Dimensions,
-  Image,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   View
 } from "react-native";
 import { connect } from "react-redux";
-import { getWeatherThunk } from "../store/weather";
 import { setCityActionCreator } from "../store/location";
 import Swiper from "react-native-swiper";
 import { Switch } from "react-native-switch";
@@ -140,26 +137,99 @@ class Weather extends React.Component {
           }}
         >
           <RobotoText style={{ fontSize: 15 }}>Temperature Scale</RobotoText>
-          <RadioForm
-            radio_props={[
-              { label: "F", value: "F" },
-              { label: "C", value: "C" },
-              { label: "K", value: "K" }
-            ]}
-            initial={0}
-            formHorizontal={true}
-            labelHorizontal={true}
-            buttonColor={"#50C900"}
-            labelColor={"#50C900"}
-            animation={true}
-            onPress={value => {
-              this.setState({ scale: value });
-            }}
-          />
+          <RadioForm formHorizontal={true} animation={true}>
+            <RadioButton labelHorizontal={true} key={0}>
+              <RadioButtonLabel
+                obj={{ label: "°K" }}
+                index={0}
+                onPress={value => {
+                  this.setState({ scale: value });
+                }}
+                labelHorizontal={true}
+                labelStyle={{ fontSize: 15, color: "#fff" }}
+                labelWrapStyle={{}}
+              />
+              <RadioButtonInput
+                obj={{ value: "K" }}
+                index={0}
+                isSelected={this.state.scale === "K"}
+                onPress={value => {
+                  this.setState({ scale: value });
+                }}
+                buttonInnerColor={"#fff"}
+                buttonOuterColor={"transparent"}
+                buttonStyle={{
+                  backgroundColor:
+                    this.state.scale === "K"
+                      ? "rgba(255, 255, 255, 0.5)"
+                      : "rgba(255, 255, 255, 0.2)"
+                }}
+                buttonWrapStyle={{ marginLeft: 5, marginRight: 10 }}
+              />
+            </RadioButton>
+            <RadioButton labelHorizontal={true} key={1}>
+              <RadioButtonLabel
+                obj={{ label: "°C" }}
+                index={1}
+                onPress={value => {
+                  this.setState({ scale: value });
+                }}
+                labelHorizontal={true}
+                labelStyle={{ fontSize: 15, color: "#fff" }}
+                labelWrapStyle={{}}
+              />
+              <RadioButtonInput
+                obj={{ value: "C" }}
+                index={1}
+                isSelected={this.state.scale === "C"}
+                onPress={value => {
+                  this.setState({ scale: value });
+                }}
+                buttonInnerColor={"#fff"}
+                buttonOuterColor={"transparent"}
+                buttonStyle={{
+                  backgroundColor:
+                    this.state.scale === "C"
+                      ? "rgba(255, 255, 255, 0.5)"
+                      : "rgba(255, 255, 255, 0.2)"
+                }}
+                buttonWrapStyle={{ marginLeft: 5, marginRight: 10 }}
+              />
+            </RadioButton>
+            <RadioButton labelHorizontal={true} key={2}>
+              <RadioButtonLabel
+                obj={{ label: "°F" }}
+                index={2}
+                onPress={value => {
+                  this.setState({ scale: value });
+                }}
+                labelHorizontal={true}
+                labelStyle={{ fontSize: 15, color: "#fff" }}
+                labelWrapStyle={{}}
+              />
+              <RadioButtonInput
+                obj={{ value: "F" }}
+                index={2}
+                isSelected={this.state.scale === "F"}
+                onPress={value => {
+                  this.setState({ scale: value });
+                }}
+                buttonInnerColor={"#fff"}
+                buttonOuterColor={"transparent"}
+                buttonStyle={{
+                  backgroundColor:
+                    this.state.scale === "F"
+                      ? "rgba(255, 255, 255, 0.5)"
+                      : "rgba(255, 255, 255, 0.2)"
+                }}
+                buttonWrapStyle={{ marginLeft: 5 }}
+              />
+            </RadioButton>
+          </RadioForm>
         </View>
         <View
           style={{
-            borderColor: "rgba(255, 255, 255, 0.4)",
+            borderColor: "rgba(255, 255, 255, 0.3)",
             borderTopWidth: 1,
             paddingTop: 15,
             paddingBottom: 15,
@@ -171,16 +241,21 @@ class Weather extends React.Component {
           }}
         >
           <RobotoText style={{ fontSize: 15 }}>Automatic Location</RobotoText>
-          <Switch
-            value={this.state.autoLocation}
-            onValueChange={this.toggleLocation}
-            activeText={"On"}
-            inActiveText={"Off"}
-            circleBorderWidth={0}
-            backgroundActive={"rgba(255, 255, 255, 0.5)"}
-            backgroundInactive={"rgba(255, 255, 255, 0.2)"}
-            circleInActiveColor={"rgba(255, 255, 255, 0.5)"}
-          />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <RobotoText style={{ fontSize: 15, marginRight: 10 }}>
+              {this.state.autoLocation ? "On" : "Off"}
+            </RobotoText>
+            <Switch
+              value={this.state.autoLocation}
+              onValueChange={this.toggleLocation}
+              activeText={"On"}
+              inActiveText={"Off"}
+              circleBorderWidth={0}
+              backgroundActive={"rgba(255, 255, 255, 0.5)"}
+              backgroundInactive={"rgba(255, 255, 255, 0.2)"}
+              circleInActiveColor={"rgba(255, 255, 255, 0.5)"}
+            />
+          </View>
         </View>
 
         <View

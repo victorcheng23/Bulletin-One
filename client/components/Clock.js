@@ -1,10 +1,8 @@
 import React from "react";
-import { Dimensions, View, Text } from "react-native";
+import { Dimensions, View } from "react-native";
 import { connect } from "react-redux";
 import moment from "moment";
-import { RobotoText, RobotoMedText, RobotoRegText } from "./StyledText";
-import { getTimezoneThunk } from "../store/timezone";
-import { getWeatherThunk } from "../store/weather";
+import { RobotoText } from "./StyledText";
 
 class Clock extends React.Component {
   constructor(props) {
