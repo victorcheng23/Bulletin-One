@@ -34,8 +34,9 @@ class Weather extends React.Component {
   }
 
   handleSubmit(value) {
-    console.log("INPUT: ", value.nativeEvent.text);
-    this.props.setCity(value.nativeEvent.text);
+    if (value.length) {
+      this.props.setCity(value.nativeEvent.text);
+    }
   }
 
   toggleLocation(value) {
@@ -127,46 +128,79 @@ class Weather extends React.Component {
         style={{
           alignItems: "center",
           justifyContent: "center",
-          height: 100
+          height: 200
         }}
       >
-        <RadioForm
-          radio_props={[
-            { label: "C", value: "C" },
-            { label: "F", value: "F" },
-            { label: "K", value: "K" }
-          ]}
-          initial={0}
-          formHorizontal={true}
-          labelHorizontal={true}
-          buttonColor={"#50C900"}
-          labelColor={"#50C900"}
-          animation={true}
-          onPress={value => {
-            this.setState({ scale: value });
-          }}
-        />
-        <Switch
-          value={this.state.autoLocation}
-          onValueChange={this.toggleLocation}
-          activeText={"On"}
-          inActiveText={"Off"}
-          circleBorderWidth={0}
-          backgroundActive={"rgba(255, 255, 255, 0.5)"}
-          backgroundInactive={"rgba(255, 255, 255, 0.2)"}
-          circleInActiveColor={"rgba(255, 255, 255, 0.5)"}
-        />
-        <TextInput
+        <View
           style={{
-            padding: 10,
-            color: "#fff",
-            fontFamily: "roboto",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: Dimensions.get("window").width * 0.85
+          }}
+        >
+          <RobotoText style={{ fontSize: 15 }}>Temperature Scale</RobotoText>
+          <RadioForm
+            radio_props={[
+              { label: "F", value: "F" },
+              { label: "C", value: "C" },
+              { label: "K", value: "K" }
+            ]}
+            initial={0}
+            formHorizontal={true}
+            labelHorizontal={true}
+            buttonColor={"#50C900"}
+            labelColor={"#50C900"}
+            animation={true}
+            onPress={value => {
+              this.setState({ scale: value });
+            }}
+          />
+        </View>
+        <View
+          style={{
+            borderColor: "rgba(255, 255, 255, 0.4)",
+            borderTopWidth: 1,
+            paddingTop: 15,
+            paddingBottom: 15,
+            marginTop: 15,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: Dimensions.get("window").width * 0.85
+          }}
+        >
+          <RobotoText style={{ fontSize: 15 }}>Automatic Location</RobotoText>
+          <Switch
+            value={this.state.autoLocation}
+            onValueChange={this.toggleLocation}
+            activeText={"On"}
+            inActiveText={"Off"}
+            circleBorderWidth={0}
+            backgroundActive={"rgba(255, 255, 255, 0.5)"}
+            backgroundInactive={"rgba(255, 255, 255, 0.2)"}
+            circleInActiveColor={"rgba(255, 255, 255, 0.5)"}
+          />
+        </View>
+
+        <View
+          style={{
             width: Dimensions.get("window").width * 0.85,
             backgroundColor: "rgba(255, 255, 255, 0.2)",
             borderRadius: 10
           }}
-          onSubmitEditing={value => this.handleSubmit(value)}
-        />
+        >
+          <TextInput
+            style={{
+              padding: 10,
+              color: "#fff",
+              fontFamily: "roboto",
+              fontSize: 15
+            }}
+            onSubmitEditing={value => this.handleSubmit(value)}
+            defaultValue={this.props.weather.name}
+          />
+        </View>
       </View>
     );
   }
