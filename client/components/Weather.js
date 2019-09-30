@@ -75,11 +75,9 @@ class Weather extends React.Component {
   weather() {
     return (
       <View style={{ alignItems: "center" }}>
-        <TouchableOpacity>
-          <RobotoText style={{ fontSize: 23, marginBottom: 5 }}>
-            {this.titleCase(this.props.weather.name)}
-          </RobotoText>
-        </TouchableOpacity>
+        <RobotoText style={{ fontSize: 23, marginBottom: 5 }}>
+          {this.titleCase(this.props.weather.name)}
+        </RobotoText>
         <RobotoText style={{ fontSize: 18 }}>
           {this.titleCase(this.props.weather.weather[0].description)}
         </RobotoText>
@@ -307,8 +305,15 @@ class Weather extends React.Component {
             <View style={styles.slide}>{this.settings()}</View>
             <View style={styles.slide}>{this.weather()}</View>
             <View style={styles.slide}>
-              <RobotoText style={{ textAlign: "center", fontSize: 20 }}>
-                Some Other Stuff
+              <RobotoText
+                style={{ textAlign: "center", fontSize: 20, marginTop: 20 }}
+              >
+                Some Other Weather Stuff
+              </RobotoText>
+              <RobotoText
+                style={{ textAlign: "center", fontSize: 15, marginTop: 10 }}
+              >
+                I didn't have time to get to
               </RobotoText>
             </View>
           </Swiper>
@@ -342,8 +347,6 @@ export default connect(
 //STYLING
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.2)",
     width: "100%"
   },
   row: {
@@ -351,20 +354,14 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   wrapper: {
-    // backgroundColor: '#f00'
+    height: 230
   },
   transparent: {
     opacity: 0
   },
   slide: {
-    flex: 1,
-    backgroundColor: "transparent",
     color: "#fff"
   },
-  container: {
-    flex: 1
-  },
-
   imgBackground: {
     backgroundColor: "transparent",
     position: "absolute"

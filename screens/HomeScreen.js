@@ -15,6 +15,8 @@ import Clock from "../client/components/Clock";
 import Weather from "../client/components/Weather";
 import { getTimezoneThunk } from "../client/store/timezone";
 import { getWeatherThunk } from "../client/store/weather";
+import Reminders from "../client/components/Reminders";
+import News from "../client/components/News";
 
 const bg = {
   a1: ["#0c48b6", "#36a0fa", "#bfdfff", "#f4fbff"],
@@ -96,6 +98,8 @@ class HomeScreen extends React.Component {
         >
           <Clock />
           <Weather />
+          <Reminders />
+          <News />
         </ScrollView>
       </LinearGradient>
     );
