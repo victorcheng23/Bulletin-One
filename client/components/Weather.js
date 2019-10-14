@@ -357,7 +357,8 @@ const styles = StyleSheet.create({
     height: 230
   },
   transparent: {
-    opacity: 0
+    opacity: 0,
+    color: "transparent"
   },
   slide: {
     color: "#fff"

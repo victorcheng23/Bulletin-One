@@ -36,8 +36,10 @@ export default class News extends React.Component {
                 marginTop: 10
               }}
             >
-              <RobotoText style={{ fontSize: 17 }}>Placeholder</RobotoText>
-              <RobotoText>Some placeholder news description</RobotoText>
+              <RobotoText style={{ fontSize: 17 }}>Jurassic Park</RobotoText>
+              <RobotoText>
+                Scientists have successfully cloned a dinosaur.
+              </RobotoText>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -49,8 +51,8 @@ export default class News extends React.Component {
                 marginTop: 10
               }}
             >
-              <RobotoText style={{ fontSize: 17 }}>Placeholder</RobotoText>
-              <RobotoText>Some placeholder news description</RobotoText>
+              <RobotoText style={{ fontSize: 17 }}>Armageddon</RobotoText>
+              <RobotoText>The world is ending in 3 days!</RobotoText>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -62,8 +64,8 @@ export default class News extends React.Component {
                 marginTop: 10
               }}
             >
-              <RobotoText style={{ fontSize: 17 }}>Placeholder</RobotoText>
-              <RobotoText>Some placeholder news description</RobotoText>
+              <RobotoText style={{ fontSize: 17 }}>Virtual World?</RobotoText>
+              <RobotoText>Life revealed to be a virtual simulation.</RobotoText>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -75,8 +77,8 @@ export default class News extends React.Component {
                 marginTop: 10
               }}
             >
-              <RobotoText style={{ fontSize: 17 }}>Placeholder</RobotoText>
-              <RobotoText>Some placeholder news description</RobotoText>
+              <RobotoText style={{ fontSize: 17 }}>First Contact</RobotoText>
+              <RobotoText>Alien life discovered on the moon!</RobotoText>
             </View>
           </TouchableOpacity>
         </View>

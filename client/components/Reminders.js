@@ -58,10 +58,8 @@ export default class Reminders extends React.Component {
                 marginTop: 10
               }}
             >
-              <RobotoText style={{ fontSize: 17 }}>
-                Present Stackathon
-              </RobotoText>
-              <RobotoText>Do some presentation things</RobotoText>
+              <RobotoText style={{ fontSize: 17 }}>First Meal</RobotoText>
+              <RobotoText>Eat some breakfast</RobotoText>
             </View>
           </TouchableOpacity>
         </View>
